@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:padding="2dp"
+                android:background="@color/primary">
+
+    <ImageView
+        android:id="@+id/img_actionbar_menu_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:paddingLeft="15dp"
+        android:src="@drawable/ic_launcher_background"
+        android:paddingRight="15dp"/>
+
+    <TextView
+        android:id="@+id/lbl_actionbar_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SELECTED APPS"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:singleLine="true"
+        android:layout_centerVertical="true"
+        android:padding="5dp"
+        android:layout_toStartOf="@+id/img_actionbar_action_btn"
+        android:layout_toEndOf="@+id/img_actionbar_menu_btn"/>
+    <ImageView
+        android:id="@+id/img_actionbar_action_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:src="@drawable/fragmentation_ic_stack" />
+</RelativeLayout>

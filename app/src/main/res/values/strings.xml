@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">MasterTemplate</string>
+
+    <!--App Message-->
+    <string name="api_retry_error">Please retry!</string>
+    <string name="api_default_error">Something wrong happened!</string>
+    <string name="some_error">Some Error Occurred!</string>
+    <string name="connection_error">Internet connection lost!</string>
+    <string name="please_grant_permission">Please grant permission</string>
+
+    <!--Login UI-->
+    <string name="login_dummy">Login Dummy</string>
+    <string name="login">Login</string>
+    <string name="submit">Submit</string>
+    <string name="register">Register</string>
+    <string name="email">Enter email</string>
+    <string name="password">Enter password</string>
+    <string name="sign_up"><u>Sign up</u></string>
+    <string name="forgot_password"><u>Forgot password</u></string>
+    <string name="confirm_password">Enter confirm password</string>
+
+    <!--Login Validation-->
+    <string name="empty_email">Please provide a non empty email.</string>
+    <string name="invalid_email">Please provide a valid email.</string>
+    <string name="empty_password">Please provide a non empty password.</string>
+
+    <!--Register Validation-->
+    <string name="error_password_length">Password length must be greater than 6 characters.</string>
+    <string name="error_blank_email">Please enter email.</string>
+    <string name="error_invalid_email">Please enter valid email.</string>
+    <string name="error_mismatch_password">Password and confirm password must be the same.</string>
+    <string name="error_blank_password">Please enter password.</string>
+    <string name="error_blank_confirm_password">Please enter confirm password.</string>
+    <string name="error_no_connectivity">No internet connection.</string>
+    <string name="message_register_success">Registered successfully</string>
+    <string name="message_success_forgot_password">Password sent to your registered E-mail</string>
+    <string name="message_success_login">Welcome</string>
+
+
+</resources>
