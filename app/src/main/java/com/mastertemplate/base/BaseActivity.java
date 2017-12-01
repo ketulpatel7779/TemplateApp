@@ -30,7 +30,7 @@ public abstract class BaseActivity extends SupportActivity implements BaseView {
     }
 
     @Override
-    public void askPermissionIfRequire(String permission, String rationalMsg, Permission.PermissionListener permissionListener) {
+    public void askPermissionIfRequire(String permission[], String rationalMsg, Permission.PermissionListener permissionListener) {
         Permission.askPermission(this, permission, rationalMsg, permissionListener);
     }
 

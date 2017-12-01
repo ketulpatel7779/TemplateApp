@@ -3,6 +3,7 @@ package com.mastertemplate.base;
 
 import android.support.v4.app.FragmentActivity;
 
+
 import com.mastertemplate.utils.permission.Permission;
 
 import me.yokeyword.fragmentation.SupportFragment;
@@ -62,7 +63,7 @@ public abstract class BaseFragment extends SupportFragment implements BaseView {
     }
 
     @Override
-    public void askPermissionIfRequire(String permission, String rationalMsg, Permission.PermissionListener permissionListener) {
+    public void askPermissionIfRequire(String[] permission, String rationalMsg, Permission.PermissionListener permissionListener) {
         ((BaseActivity) _mActivity).askPermissionIfRequire(permission, rationalMsg, permissionListener);
     }
 

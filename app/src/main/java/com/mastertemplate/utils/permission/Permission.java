@@ -1,5 +1,6 @@
 package com.mastertemplate.utils.permission;
 
+
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -39,50 +40,65 @@ public class Permission {
      * All the @{@link RuntimePermission} must use this function to take permission.
      *
      * @param activity        Activity
-     * @param Permission      @{@link android.Manifest.permission} String
+     * @param permissions      @{@link android.Manifest.permission} String
      * @param rationalMessage msg to display
      * @param Onlistener      listener to call on result
      */
     @TargetApi(Build.VERSION_CODES.M)
-    public static void askPermission(final Activity activity, final String Permission, final String rationalMessage, final PermissionListener Onlistener) {
+    public static void askPermission(final Activity activity, final String[] permissions, final String rationalMessage, final PermissionListener Onlistener) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            int hasWriteContactsPermission = activity.checkSelfPermission(Permission);
-            if (hasWriteContactsPermission != PackageManager.PERMISSION_GRANTED) {
-                if (activity.shouldShowRequestPermissionRationale(Permission)) {
-                    Intent intent = new Intent(activity.getApplicationContext(), PermissionActivity.class);
-                    intent.putExtra("Permission", Permission);
-                    activity.startActivity(intent);
-                    listener = Onlistener;
-                } else {
-                    if (DataManager.getPermissionValue(Permission)) {
-                        CommonUtils.showConfirmationDialog(activity, "Permission", rationalMessage, "SETTINGS", "CANCEL", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                                        Uri uri = Uri.fromParts("package", activity.getPackageName(), null);
-                                        intent.setData(uri);
-                                        activity.startActivityForResult(intent, 420);
-                                        CommonUtils.showErrorToast(activity, activity.getString(R.string.please_grant_permission));
-                                        dialog.dismiss();
-                                    }
-                                },
-                                new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                    }
-                                });
-                    } else {
-                        Intent intent = new Intent(activity.getApplicationContext(), PermissionActivity.class);
-                        intent.putExtra("Permission", Permission);
-                        activity.startActivity(intent);
-                        listener = Onlistener;
+
+            boolean isGranted=true;
+            for (String permission : permissions) {
+                if (activity.checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
+
+                    int hasWriteContactsPermission = activity.checkSelfPermission(permission);
+                    if (hasWriteContactsPermission != PackageManager.PERMISSION_GRANTED) {
+                        if (activity.shouldShowRequestPermissionRationale(permission)) {
+                            Intent intent = new Intent(activity.getApplicationContext(), PermissionActivity.class);
+                            intent.putExtra("Permission", permission);
+                            activity.startActivity(intent);
+                            listener = Onlistener;
+                        } else {
+                            if (DataManager.getPermissionValue(permission)) {
+                                CommonUtils.showConfirmationDialog(activity, "Permission", rationalMessage, "SETTINGS", "CANCEL", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                                                Uri uri = Uri.fromParts("package", activity.getPackageName(), null);
+                                                intent.setData(uri);
+                                                activity.startActivityForResult(intent, 420);
+                                                CommonUtils.showErrorToast(activity, activity.getString(R.string.please_grant_permission));
+                                                dialog.dismiss();
+                                            }
+                                        },
+                                        new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                dialog.dismiss();
+                                            }
+                                        });
+                            } else {
+                                Intent intent = new Intent(activity.getApplicationContext(), PermissionActivity.class);
+                                intent.putExtra("Permission", permission);
+                                activity.startActivity(intent);
+                                listener = Onlistener;
+                            }
+                        }
+
+
+
                     }
+                    isGranted=false;
                 }
 
-            } else {
-                Onlistener.granted();
+
+
+
             }
+            if(isGranted)
+                Onlistener.granted();
+
         } else {
             Onlistener.granted();
         }

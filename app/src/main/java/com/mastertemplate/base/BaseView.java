@@ -62,5 +62,5 @@ public interface BaseView {
      * @param msg  msg string resource id
      * @param permissionListener  listener will be called on permission result
      * */
-    void askPermissionIfRequire(String permission,String msg,Permission.PermissionListener permissionListener);
+    void askPermissionIfRequire(String[] permissions,String msg,Permission.PermissionListener permissionListener);
 }

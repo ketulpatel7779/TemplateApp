@@ -33,8 +33,6 @@ import com.mastertemplate.ui.dashboard.NavigationDrawerActivity;
 import com.mastertemplate.utils.CommonUtils;
 import com.mastertemplate.utils.permission.Permission;
 
-import java.io.File;
-
 /**
  * Displays an Registration screen.
  */
@@ -96,14 +94,10 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
 
         } else if (requestCode == REQ_CODE_GALLARY && resultCode == RESULT_OK) {
             dataUri = data.getData();
-            Glide
-                    .with(RegisterActivity.this)
+            Glide.with(RegisterActivity.this)
                     .load(dataUri.toString())
                     .into(ivUserProfilePic);
-            if (dataUri != null) {
 
-                registerPresenter.uploadImage(inputEmail.getText().toString(), inputPassword.getText().toString(), inputConfirmPassword.getText().toString(), new File(CommonUtils.getRealPathFromURI(dataUri, getApplicationContext())));
-            }
 
         }
     }
@@ -116,8 +110,11 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btn_login:
+            case R.id.btn_register:
                 if (CommonUtils.isNetworkConnected(RegisterActivity.this)) {
+
+                    //registerPresenter.uploadImage(inputEmail.getText().toString(), inputPassword.getText().toString(), inputConfirmPassword.getText().toString(), new File(CommonUtils.getRealPathFromURI(dataUri, getApplicationContext())));
+
                     registerPresenter.registerUser(inputEmail.getText().toString(), inputPassword.getText().toString(), inputConfirmPassword.getText().toString());
                 } else {
                     showErrorMsg(getResources().getString(R.string.error_no_connectivity));
@@ -131,7 +128,11 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
                             @Override
                             public void onClick(final DialogInterface dialog, int which) {
 
-                                askPermissionIfRequire(Manifest.permission.WRITE_EXTERNAL_STORAGE, "This is required for use camera", new Permission.PermissionListener() {
+                                String PERMISSIONS[] = new String[]{
+                                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                                        Manifest.permission.CAMERA
+                                };
+                                askPermissionIfRequire(PERMISSIONS, "This is required for use camera", new Permission.PermissionListener() {
                                     @Override
                                     public void granted() {
                                         dataUri = CommonUtils.openCamera(RegisterActivity.this);
@@ -140,13 +141,14 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
 
                                     @Override
                                     public void denied() {
-                                        CommonUtils.showErrorToast(RegisterActivity.this,"This permission is required for use camera in this app");
+                                        CommonUtils.showErrorToast(RegisterActivity.this, "This permission is required for use camera in this app");
                                     }
                                 });
 
                             }
                         },
                         new DialogInterface.OnClickListener() {
+
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 CommonUtils.openGallery(RegisterActivity.this);
