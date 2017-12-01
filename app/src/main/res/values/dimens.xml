@@ -17,4 +17,20 @@
     <dimen name="margin_small">5dp</dimen>
     <dimen name="margin_medium">10dp</dimen>
     <dimen name="margin_big">20dp</dimen>
+
+
+
+
+
+    <dimen name="padding_side">50dp</dimen>
+    <dimen name="avtar_size">100dp</dimen>
+
+
+
+
+
+
+
+
+
 </resources>

@@ -33,11 +33,12 @@ import com.mastertemplate.utils.CommonUtils;
 /**
  * Displays an Login or dashboard screen.
  */
+
 public class LoginActivity extends BaseActivity implements LoginContract.View, View.OnClickListener {
     LoginPresenter loginPresenter;
     EditText inputEmail, inputPswd;
-    Button btnLogin;
-    TextView lblRegister, lblForgorPswd;
+    Button btnLogin,btn_register;
+    TextView   lblForgorPswd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +54,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View, V
      */
     private void setClickListeners() {
         btnLogin.setOnClickListener(this);
-        lblRegister.setOnClickListener(this);
+        btn_register.setOnClickListener(this);
         lblForgorPswd.setOnClickListener(this);
     }
 
@@ -63,7 +64,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View, V
     private void initView() {
         inputEmail = (EditText) findViewById(R.id.input_email);
         inputPswd = (EditText) findViewById(R.id.input_password);
-        lblRegister = (TextView) findViewById(R.id.btn_register);
+        btn_register = (Button) findViewById(R.id.btn_register);
         lblForgorPswd = (TextView) findViewById(R.id.btn_forgot_password);
         btnLogin = (Button) findViewById(R.id.btn_login);
     }
@@ -79,6 +80,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View, V
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_login:
+                CommonUtils.hideSoftInput(LoginActivity.this);
                 if (CommonUtils.isNetworkConnected(LoginActivity.this)) {
                     loginPresenter.logInUser(inputEmail.getText().toString(), inputPswd.getText().toString());
                 } else {
@@ -86,10 +88,12 @@ public class LoginActivity extends BaseActivity implements LoginContract.View, V
                 }
                 break;
             case R.id.btn_register:
+                CommonUtils.hideSoftInput(LoginActivity.this);
                 Intent dashBoardIntent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(dashBoardIntent);
                 break;
             case R.id.btn_forgot_password:
+                CommonUtils.hideSoftInput(LoginActivity.this);
                 Intent forgotPasswordIntent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
                 startActivity(forgotPasswordIntent);
                 break;

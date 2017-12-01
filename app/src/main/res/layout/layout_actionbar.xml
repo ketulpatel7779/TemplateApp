@@ -15,7 +15,6 @@
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:paddingLeft="15dp"
-        android:src="@drawable/ic_launcher_background"
         android:paddingRight="15dp"/>
 
     <TextView
